@@ -21,7 +21,6 @@
                 }
             ?>
             <a href="#about">Sobre</a>
-            <a>Deu Certo</a>
         </div> 
         <main>
             <p>Scroll down and watch the menu remain fixed in the same position, as though it was floating.</p>
