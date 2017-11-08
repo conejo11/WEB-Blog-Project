@@ -37,8 +37,6 @@
         </main>
 
         <?php
-            $teste = getenv("HUEHEUEHE");
-            echo("<h1>".$teste);
             #Isso é por que usamos o Heroku
             $sqlURL = parse_url(getenv("CLEARDB_DATABASE_URL"));
             $server = $url["host"];
@@ -47,6 +45,8 @@
             $db = substr($url["path"], 1);
             
             $conn = new mysqli($server, $username, $password, $db);
+
+            // Caso falhe, estamos na udesc (provavelmente)
             if (!$conn){
                 $sqlURL = "localhost";
                 $sqlUser = "root";
@@ -59,11 +59,7 @@
 
             if (!$conn){
                 echo ("Deu merda! " . mysql_error());
-            } else {
-                echo("Conectamos!");
             }
-
-            echo( "</h1>");
 
             function gera() {
                 echo('<article id="post-110982" class="post-110982 post type-post status-publish format-standard hentry category-imagens tag-salgadinhos-e-drogas">
