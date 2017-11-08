@@ -23,7 +23,6 @@
             <a href="#about">Sobre</a>
         </div> 
         <main>
-            <p>Scroll down and watch the menu remain fixed in the same position, as though it was floating.</p>
             <nav class="floating-menu">
                 <div class="divLoco">
                     <h3>Login</h3>
@@ -39,26 +38,32 @@
 
         <?php
             $teste = getenv("HUEHEUEHE");
-            echo($teste);
+            echo("<h1>".$teste);
             #Isso é por que usamos o Heroku
             $sqlURL = parse_url(getenv("CLEARDB_DATABASE_URL"));
-            $sqlUser = "b9d4708c7887da";
-            $sqlPw = "14ff0a87";
-            $sqlDB = "heroku_3154d21c8bd766a";
-            if (!is_null($sqlURL)){
+            $server = $url["host"];
+            $username = $url["user"];
+            $password = $url["pass"];
+            $db = substr($url["path"], 1);
+            
+            $conn = new mysqli($server, $username, $password, $db);
+            if (!$conn){
                 $sqlURL = "localhost";
                 $sqlUser = "root";
                 $sqlPw = "udesc";
                 $sqlDB = "odaw";
+
+                $conn = mysqli_connect($sqlURL, $sqlUser, $sqlPw, $sqlDB);
             }
             
-            $sqlConnection = mysqli_connect($sqlURL, $sqlUser, $sqlPw, $sqlDB);
 
-            if (!$sqlConnection){
+            if (!$conn){
                 echo ("Deu merda! " . mysql_error());
             } else {
                 echo("Conectamos!");
             }
+
+            echo( "</h1>");
 
             function gera() {
                 echo('<article id="post-110982" class="post-110982 post type-post status-publish format-standard hentry category-imagens tag-salgadinhos-e-drogas">
