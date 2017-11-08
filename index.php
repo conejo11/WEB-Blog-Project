@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="item.css">
         <link rel="stylesheet" href="global.css">
         
-        <title>Oiiiii</title>
+        <title>Projeto Final - ODAW - Diel e Conejo</title>
     </head>
     <body bgcolor='#454545'>
         <div class="bgBarraTop">
