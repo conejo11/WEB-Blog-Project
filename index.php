@@ -42,6 +42,17 @@
         <div> oiiii </div>
 
         <?php
+            $sqlURL = "mysql://b9d4708c7887da:14ff0a87@us-cdbr-iron-east-05.cleardb.net/heroku_3154d21c8bd766a?reconnect=true";
+            $sqlUser = "b9d4708c7887da";
+            $sqlPw = "14ff0a87";
+            $sqlConnection = mysqli_connect($sqlURL, $sqlUser, $sqlPw);
+
+            if (!$sqlConnection){
+                echo ("Deu merda! " . mysql_error());
+            } else {
+                echo("Conectamos!");
+            }
+
             function gera() {
                 echo('<article id="post-110982" class="post-110982 post type-post status-publish format-standard hentry category-imagens tag-salgadinhos-e-drogas">
                         <div class="blog-item-wrap">
