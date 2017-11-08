@@ -1,0 +1,123 @@
+/* Configura a barra em si */
+
+.barraTop {
+    background-color: rgb(19, 17, 17);
+    overflow: hidden;
+    border-width: 10%;
+    padding: 2px;
+    border-radius: 30px;
+    width: 95%;
+    left: 2%;
+    position: fixed;
+    z-index: 100;
+    top: 25px;
+    
+}
+
+
+/* Configura como vao ficar os <a> dentro da barra */
+.barraTop a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+
+    /*Muda o cursor*/
+    cursor: pointer;
+
+    border-radius: 10px;    
+
+    /* Habilita animacoes*/
+    transition: all 0.5s;
+
+}
+
+/* O que acontece quando o mouse fica em cima */
+.barraTop a:hover {
+    border-radius: 30px;
+    background-color: #ddd;
+    color: black;
+}
+
+
+/* Muda cor quando e o ativo */
+.barraTop a.menuAtual {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 30px;
+}
+
+.bgBarraTop {
+    background-color: rgba(20, 20, 20, 0.5);
+    overflow: hidden;
+    width: 100%;
+    height: 85px;
+    left: 0;
+    top: 0px;
+    position: fixed;
+    z-index: 99;
+
+    background-size:cover;
+
+    -webkit-backdrop-filter: blur(5px) /*grayscale(100%)*/; /*Safari 9+*/
+    backdrop-filter: blur(5px) /*grayscale(100%)*/;
+    
+}
+
+/* Menu de login! */
+.arrow-left {
+    width: 0; 
+    height: 0;
+    border-top: 55px solid transparent;
+    border-bottom: 55px solid transparent;
+    
+    border-left: 50px solid rgba(49, 0, 0, 0.75);
+    display: inline-block;
+  }
+
+  .floating-menu {
+    font-family: sans-serif;
+    background: rgba(58, 77, 74, 0.5);
+
+    color: #ffffff;
+    
+    padding: 5px;
+    width: 250px;
+    left: -200px;
+    border-color: red;
+    border-width: 2px;
+    border-radius: 30px;
+    top: 20%;
+    z-index: 100;
+    position: fixed;
+    transition: all 0.5s;
+
+    -webkit-backdrop-filter: blur(5px) /*grayscale(100%)*/; /*Safari 9+*/
+    backdrop-filter: blur(5px) /*grayscale(100%)*/;
+  }
+
+  .floating-menu:hover {
+    left: 10px;
+  }
+
+  .divLoco{
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .floating-menu input{
+      position: relative;
+      margin-left: 10px;
+  }
+
+  .floating-menu a, 
+  .floating-menu h3 {
+    font-size: 1.3em;
+    display: block;
+    margin: 0 0.5em;
+    color: white;
+    
+  }
