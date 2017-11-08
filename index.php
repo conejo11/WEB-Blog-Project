@@ -37,15 +37,22 @@
             </nav>
         </main>
 
-        <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur suscipit deleniti unde odio vero hic veniam. Molestias iste quod expedita temporibus qui accusantium omnis, et voluptate nihil consectetur hic cupiditate!</div>
-        <br>
-        <div> oiiii </div>
-
         <?php
-            $sqlURL = "mysql://b9d4708c7887da:14ff0a87@us-cdbr-iron-east-05.cleardb.net/heroku_3154d21c8bd766a?reconnect=true";
+            $teste = getenv("HUEHEUEHE");
+            echo($teste);
+            #Isso é por que usamos o Heroku
+            $sqlURL = parse_url(getenv("CLEARDB_DATABASE_URL"));
             $sqlUser = "b9d4708c7887da";
             $sqlPw = "14ff0a87";
-            $sqlConnection = mysqli_connect($sqlURL, $sqlUser, $sqlPw);
+            $sqlDB = "heroku_3154d21c8bd766a";
+            if (!is_null($sqlURL)){
+                $sqlURL = "localhost";
+                $sqlUser = "root";
+                $sqlPw = "udesc";
+                $sqlDB = "odaw";
+            }
+            
+            $sqlConnection = mysqli_connect($sqlURL, $sqlUser, $sqlPw, $sqlDB);
 
             if (!$sqlConnection){
                 echo ("Deu merda! " . mysql_error());
