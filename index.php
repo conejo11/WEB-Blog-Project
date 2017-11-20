@@ -40,23 +40,23 @@
 
 	<?php
 	#Isso é por que usamos o Heroku
-	/*$sqlURL = parse_url( getenv( "CLEARDB_DATABASE_URL" ) );
+	$sqlURL = parse_url( getenv( "CLEARDB_DATABASE_URL" ) );
 	$server = $sqlURL[ "host" ];
 	$username = $sqlURL[ "user" ];
 	$password = $sqlURL[ "pass" ];
 	$db = substr( $sqlURL[ "path" ], 1 );
 
 	$conn = new mysqli( $server, $username, $password, $db );
-	*/
+	
 	// Caso falhe, estamos na udesc (provavelmente)
-	//if ( !$conn ) {
+	if ( !$conn ) {
 		$sqlURL = "localhost";
 		$sqlUser = "gustavo";
 		$sqlPw = "";
 		$sqlDB = "odaw";
 
 		$conn = new mysqli( $sqlURL, $sqlUser, $sqlPw );
-	//}
+	}
 
 
 	if ( $conn->connect_error ) {
