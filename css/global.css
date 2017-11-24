@@ -1,0 +1,42 @@
+/* =Global
+----------------------------------------------- */
+
+body {
+    color: #aaa;
+    background-color: #353535;
+    word-wrap: break-word;
+    font-family: 'Lucida Sans', sans-serif;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+a {
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+article {
+    margin-top: 25px !important;
+}
+
+a:hover, a:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin: 0 auto;
+}

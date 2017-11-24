@@ -1,0 +1,160 @@
+.artigos {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.single-view, .post-inner-content {
+    background-color: rgb(25, 34, 39);
+    border-top: none;
+    color: #ffffff;
+    width: 85%;
+    display: block;
+    margin: auto;
+}
+
+.page-content, .entry-content, .entry-summary {
+    margin: 0.5em 0 0;
+}
+
+header.entry-header.page-header {
+    background: #4b4b4b;
+    display: table;
+    width: 100%;
+    min-height: 100px;
+}
+
+header.entry-header.page-header>.le-title>h2.entry-title a {
+    color: #ff9900;
+}
+
+.le-title {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+header.entry-header.page-header>.le-title h2 {
+    margin: 60px;
+    line-height: 36px;
+    font-size: 30px;
+}
+
+.entry-header {
+    margin-bottom: 0px;
+}
+
+.le-data .dia {
+    display: block;
+    font-size: 34px;
+    line-height: 34px;
+}
+
+.le-data .mes {
+    display: block;
+    font-size: 22px;
+    line-height: 22px;
+}
+
+.le-data .ano {
+    display: block;
+    font-size: 17px;
+    line-height: 17px;
+}
+
+.le-data {
+    background: #1b1b1b;
+    color: yellow;
+    width: 75px;
+    border-right: 5px solid #fff;
+    display: table-cell;
+    font-weight: 700;
+    text-align: center;
+    font-family: 'Lucida Sans', sans-serif;
+    vertical-align: middle;
+}
+
+.le-title a {
+    font-weight: 400;
+}
+
+header.entry-header.page-header>.le-title>h2.entry-title a {
+    color: #ffffff;
+    font-family: 'Carter One', cursive;
+}
+
+.le-title {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+header.entry-header.page-header>.le-title h2 {
+    margin: 10px;
+    line-height: 36px;
+    font-size: 30px;
+}
+
+.entry-title {
+    color: #444;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.entry-title a {
+    color: #444;
+}
+
+.entry-title {
+    margin-top: 0;
+}
+
+.blog .format-aside .entry-title, .archive .format-aside .entry-title {
+    display: none;
+}
+
+.entry-content {
+    margin-top: 0px;
+}
+
+.entry-content>.in {
+    padding: 20px;
+}
+
+.in>p>iframe {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    height: 435px;
+}
+
+.wp-caption {
+    border: 1px solid #ccc;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+}
+
+.wp-caption img[class*="wp-image-"] {
+    display: block;
+}
+
+.entry-meta a {
+    font-size: 13px;
+    color: #6B6B6B;
+}
+
+.entry-meta {
+    margin-bottom: 30px;
+}
+
+footer.entry-meta {
+    margin-bottom: 0;
+}
+
+.page-header {
+    margin-top: 0;
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.entry-meta .fa {
+    font-size: 14px;
+    margin-right: 3px;
+}
