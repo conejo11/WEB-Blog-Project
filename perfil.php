@@ -32,7 +32,7 @@
                         <header class="entry-header page-header">
                             <div class="le-title">
                                 <h2 class="entry-title">
-                                <a rel="bookmark"><center><a>Administração:</center></a>
+                                <a rel="bookmark"><center><a><?php echo(($_SESSION['usuario']['tipo'] == '1' ? 'Administrador' : 'Usuário')) ?></center></a>
                             </h2>
                             </div>
                         </header>

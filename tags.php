@@ -15,6 +15,12 @@
         <?php
             $currentPage = 'tags';
             include 'bdconnect.php';
+
+            include 'postCreator.php';
+
+            echo("<div class='artigos'>");
+            gera($_GET['tag'], 'lol', 'lol', 'lol', 'lol', 'lol', array('Felicidade', 'Coisas satanicas'), 'lol', 1, null);
+            echo('</div>');
         ?>
 
     </body>

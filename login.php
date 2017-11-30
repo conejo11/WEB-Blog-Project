@@ -21,6 +21,9 @@
             $tentouLogar = false;
             $loginFoi = false;
 
+            $tentouSignUp = false;
+            $signUpFoi = false;
+
             if (!empty($_SESSION["usuario"])) {
                 header("Location: index.php");
             } else {
@@ -28,13 +31,50 @@
                     $tentouLogar = true;
                     $res = $conn->query('SELECT * FROM usuario WHERE login=\''. $_POST['login'] .'\' AND senha=\''. $_POST['password'] .'\' ');
                     if ($res) {
-                        $loginFoi = true;
                         $usuario = mysqli_fetch_assoc($res);
-                        $message = 'Bem vindo de volta '.$usuario['nome_completo']. '!';
-                        $_SESSION["usuario"] = $usuario;
-                        header("Refresh: 3");
+                        if (!empty($usuario)) {
+                            $loginFoi = true;
+                            $message = 'Bem vindo de volta '.$usuario['nome_completo']. '!';
+                            $_SESSION["usuario"] = $usuario;
+                            header("Refresh: 3");
+                        } else {
+                            $message = 'Por favor, confira seus dados!<br>Retornando a página em 3 segundos..';
+                            header("Refresh: 3");
+                        }
                     } else {
                         $message = 'Query falhou:<br>'. $conn->error;
+                    }
+                } elseif (!empty($_POST['senhaSignup'])) {
+                    $tentouSignUp = true;
+                    $res = $conn->query('SELECT * FROM usuario WHERE login=\''. $_POST['usuarioSignup'] .'\'');
+                    if ($res) {
+                        $usuario = mysqli_fetch_assoc($res);
+                        if (empty($usuario)) {
+                            $res->close();
+                            $res = $conn->query('SELECT inserirUsuario(\''. $_POST['nomecompletoSignup'] .'\', \''. $_POST['usuarioSignup'] .'\', \''. $_POST['senhaSignup'] .'\');');
+                            if ($res) {
+                                $signUpFoi = true;
+                                $message = 'Bem vindo ao clube '.$_POST['nomecompletoSignup'].'!';
+                                $res->close();
+
+                                $res = $conn->query('SELECT * FROM usuario WHERE login=\''. $_POST['usuarioSignup'] .'\' AND senha=\''. $_POST['senhaSignup'] .'\' ');
+                                if ($res) {
+                                    $usuario = mysqli_fetch_assoc($res);
+                                    if (!empty($usuario)) {
+                                        $_SESSION["usuario"] = $usuario;
+                                        header("Refresh: 3");
+                                    } else {
+                                        $message = 'Query falhou:<br>'. $conn->error;
+                                    }
+                                } else {
+                                    $message = 'Query falhou:<br>'. $conn->error;
+                                }
+                            } else {
+                                $message = 'Query falhou:<br>'. $conn->error;
+                            }
+                        } else {
+                            $message = 'Erro!<br>Usuário ja existente!';
+                        }
                     }
                 }
             }
@@ -73,38 +113,18 @@
                                             <?php
                                                 if ($tentouLogar) {
                                                     echo('
-                                                    <div id="login">
-                                                        <h1>Bem vindo de volta!</h1>');
+                                                    <div id="login">');
                                                     if ($loginFoi) {
-                                                        echo("<h2 class='sucesso'>". $message ."</h2>");
+                                                        echo("
+                                                            <h1>Bem vindo!</h1><h2 class='sucesso'>". $message ."</h2>");
                                                     } else {
-                                                        echo("<h2 class='erro'>". $message ."</h2>");
+                                                        echo("
+                                                            <h1>Problema ao logar!</h1><h2 class='erro'>". $message ."</h2>");
                                                     }
                                                     echo('
                                                     </div>
                                                     <div id="signup">
-                                                        <h1>Crie sua conta!</h1>
-                                                        <form action="login.php" method="post">
-                                                            <div class="field-wrap">
-                                                                <label>
-                                                                    Nome Completo<span class="req">*</span>
-                                                                </label>
-                                                                <input type="text" required autocomplete="off" />
-                                                            </div>
-                                                            <div class="field-wrap">
-                                                                <label>
-                                                                    Usuário<span class="req">*</span>
-                                                                </label>
-                                                                <input type="text" required autocomplete="off" />
-                                                            </div>
-                                                            <div class="field-wrap">
-                                                                <label>
-                                                                    Senha<span class="req">*</span>
-                                                                </label>
-                                                                <input type="password" required autocomplete="off" />
-                                                            </div>
-                                                            <button type="submit" class="button button-block" />CRIAR CONTA</button>
-                                                        </form>
+                                                        <h1>Bem vindo</h1>
                                                     </div>
 
                                                     ');
@@ -112,26 +132,27 @@
                                                     echo('
                                                     <div id="signup">
                                                         <h1>Crie sua conta!</h1>
+                                                        ' . ($tentouSignUp ? '<h2 class="'. ($signUpFoi ? 'sucesso' : 'erro') .'">'. $message .'</h2>' : '') . '
                                                         <form action="login.php" method="post">
                                                             <div class="field-wrap">
-                                                                <label>
+                                                                <label id="labelNomeCompletoSignUp">
                                                                     Nome Completo<span class="req">*</span>
                                                                 </label>
-                                                                <input type="text" required autocomplete="off" />
+                                                                <input type="text" id="nomecompletoSignup" name="nomecompletoSignup" required autocomplete="off" />
                                                             </div>
                                                             <div class="field-wrap">
-                                                                <label>
+                                                                <label id="labelUsuarioSignUp">
                                                                     Usuário<span class="req">*</span>
                                                                 </label>
-                                                                <input type="text" required autocomplete="off" />
+                                                                <input type="text" id="usuarioSignup" name="usuarioSignup" required autocomplete="off" />
                                                             </div>
                                                             <div class="field-wrap">
-                                                                <label>
+                                                                <label id="labelSenhaSignUp">
                                                                     Senha<span class="req">*</span>
                                                                 </label>
-                                                                <input type="password" required autocomplete="off" />
+                                                                <input type="password" id="senhaSignup" name="senhaSignup" required autocomplete="off" />
                                                             </div>
-                                                            <button type="submit" class="button button-block" />CRIAR CONTA</button>
+                                                            <button name="signup" onclick="return checkSignUp()" type="submit" class="button button-block" />CRIAR CONTA</button>
                                                         </form>
                                                     </div>
                                                     <div id="login">

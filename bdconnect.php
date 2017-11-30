@@ -3,7 +3,7 @@
         include 'barra.php';
 
         $conn = null;
-        $isLocal = false;
+        $isLocal = true;
 
         if (!$isLocal) {
             #Isso é por que usamos o Heroku
