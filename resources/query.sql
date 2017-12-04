@@ -71,5 +71,22 @@ BEGIN
 END //
 DELIMITER ;
 
+INSERT INTO tag VALUES (1, 'felicidade', 'Felicidade'),
+    (2, 'coisas_satanicas', 'Coisas Satânicas'),
+    (3, 'amor', 'Ódio'),
+    (4, 'odio', 'Amor'),
+    (5, 'assuntos_gerais', 'Assuntos Gerais');
+
+insert into tag_noticia VALUES (1, 1),
+    (1, 2);
+
+SELECT *, u.nome_completo as nome_admin
+    FROM noticia n join usuario u on u.id = n.id
+        WHERE n.id IN (SELECT tn.id_noticia
+            FROM tag_noticia tn
+                JOIN tag t ON t.id = tn.id_tag
+                    AND t.nome_completo = 'Felicidade');
+
 Noticias:
 insert into noticia values (1, 'mulher_em_ti', 'Mulheres em TI', 'Faz todo o sentido ein', 'https://leninja.com.br/wp-content/uploads/2017/11/jessicao.jpg', '02', 'maio', '2017', '1');
+insert into noticia values (2, 'felicidade', 'Be happy', 'Mas olha que imagem bonita para colocar em um grupo de familia :D', 'https://cdn.mensagenscomamor.com/content/images/p000003689.jpg?v=0', '04', 'dezembro', '2017', '2');

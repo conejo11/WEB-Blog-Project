@@ -20,17 +20,64 @@
 
             $currentPage = 'manage';
             include 'bdconnect.php';
+
+            if (!isset($_SESSION['usuario'])){
+                header("Refresh:0; url=index.php", true);
+            }
+
             $tentouExecutarQuery = false;
             $message = '';
             $queryFoi = false;
-            if (!empty($_POST['query'])) {
+            if (!empty($_POST['titulo'])) {
                 $tentouExecutarQuery = true;
-                $res = $conn->query($_POST['query']);
-                if ($res) {
-                    $queryFoi = true;
-                    $message = 'Query executada com sucesso!';
+                $titulo = $_POST['titulo'];
+                $titulo_reduzido = $_POST['titulo_reduzido'];
+                $corpo = $_POST['corpo'];
+                $url = $_POST['url'];
+                $dia = $_POST['dia'];
+                $mes = $_POST['mes'];
+                $ano = $_POST['ano'];
+                $tag = $_POST['tag'];
+
+                $nextId = intval($conn->query("SELECT MAX(id) as id FROM noticia;")->fetch_assoc()['id']) + 1;
+
+                $res = $conn->query("INSERT INTO noticia VALUES
+                    (".$nextId.", '".$titulo_reduzido."',  '".$titulo."',  '".$corpo."',  '".$url."',  ".$dia.", '".$mes."',  ".$ano.", ".$_SESSION['usuario']['id'].");");
+                if ($res){
+                    $res = $conn->query("INSERT INTO tag_noticia VALUES (". $nextId .", ". $tag .");");
+                    if (!$res){
+                        echo("<h1>tn: ". $conn->error ."</h1>");
+                    } else {
+                        $queryFoi = true;
+                        $message = 'Post Adicionado!';
+                    }
                 } else {
-                    $message = 'Query falhou:<br>'. $conn->error;
+                    echo("<h1>n: ". $conn->error ."</h1>");
+                }
+            }
+            if (!empty($_POST["excluir"])){
+                $tentouExecutarQuery = true;
+                $total = 0;
+                $array = "(";
+                if ($resultado = $conn->query("SELECT * FROM usuario", MYSQLI_ASSOC)){
+                    while ($linha = $resultado->fetch_assoc()){
+                        $cod = $linha['id'];
+                        if (isset($_POST['excluir'.$cod])){
+                            $array = $array.$cod.',';
+                            $total = $total + 1;
+                        }
+                    }
+                    $array = rtrim($array, ",").")";
+                    $resultado->close();
+    
+                }
+                if ($total != 0){
+                    if (!$conn->query("DELETE FROM usuario WHERE id in ".$array.";", MYSQLI_ASSOC)){
+                        echo $conn->error;
+                    } else {
+                        $queryFoi = true;
+                        $message = 'Usuario(s) excluidos';
+                    }
                 }
             }
         ?>
@@ -51,67 +98,25 @@
                                 <center>
                                     <div class="form">
                                         <ul class="tab-group">
-                                            <li class="tab active"><a href="#query"> Executar Query</a></li>
+                                            <li class="tab active"><a href="#adicionar">Adicionar Post</a></li>
                                             <li class="tab"><a href="#users">Usuários</a></li>
                                             <li class="tab"><a href="#sugestoes">Sugestões</a></li>
                                         </ul>
                                         <div class="tab-content">
-                                            <div id="query">
-                                                <h1>Execute uma Query no Banco de Dados</h1>
+                                            <div id="adicionar">
                                                 <?php
-                                                    if ($tentouExecutarQuery) {
-                                                        if ($queryFoi) {
-                                                            echo("<h2 class='sucesso'>". $message ."</h2>");
-                                                        } else {
-                                                            echo("<h2 class='erro'>". $message ."</h2>");
-                                                        }
-                                                    }
+                                                    include 'admin_adicionar.php';
                                                 ?>
-                                                <form action="manage.php" method="post">
-                                                    <div class="field-wrap">
-                                                        <label>
-                                                            Query<span class="req">*</span>
-                                                        </label>
-                                                        <input type="text" name='query' required autocomplete="off" />
-                                                    </div>
-                                                    <button type="submit" class="button button-block">EXECUTAR</button>
-                                                </form>
                                             </div>
                                             <div id="users">
-                                                <h1>Bem vindo de volta!</h1>
-                                                <form action="manage.php" method="post">
-                                                    <div class="field-wrap">
-                                                        <label>
-                                                            Usuário<span class="req">*</span>
-                                                        </label>
-                                                        <input type="text" required autocomplete="off" />
-                                                    </div>
-                                                    <div class="field-wrap">
-                                                        <label>
-                                                            Senha<span class="req">*</span>
-                                                        </label>
-                                                        <input type="password" required autocomplete="off" />
-                                                    </div>
-                                                    <button class="button button-block" />ENTRAR</button>
-                                                </form>
+                                                <?php
+                                                    include 'admin_users.php';
+                                                ?>
                                             </div>
                                             <div id="sugestoes">
-                                                <h1>Sugestões em análize:</h1>
-                                                <form action="manage.php" method="post">
-                                                    <div class="field-wrap">
-                                                        <label>
-                                                            Usuário<span class="req">*</span>
-                                                        </label>
-                                                        <input type="text" required autocomplete="off" />
-                                                    </div>
-                                                    <div class="field-wrap">
-                                                        <label>
-                                                            Senha<span class="req">*</span>
-                                                        </label>
-                                                        <input type="password" required autocomplete="off" />
-                                                    </div>
-                                                    <button class="button button-block" />ENTRAR</button>
-                                                </form>
+                                                <?php
+                                                    include 'admin_sugestoes.php';
+                                                ?>
                                             </div>
                                         </div>
                                     </div>

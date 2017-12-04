@@ -1,5 +1,16 @@
 <html>
     <?php
+
+    include 'bdconnect.php';
+
+    if (isset($_POST['id_favorito'])){
+        echo('asdadds');
+        $idfav = $_POST['id_favorito'];
+        $res = $conn->query('INSERT INTO noticia_favorita VALUES ('.$idfav .', '. $_SESSION['usuario']['id'] .');');
+        if (!$res){
+            echo($conn->error);
+        }
+    }
     function getTagLink($tag)
     {
         return 'tags.php?tag=' . $tag;
@@ -14,7 +25,7 @@
         return $ret;
     }
 
-    function gera($titulo, $link_titulo, $dia, $mes, $ano, $conteudo, $tags, $link_imagem, $admin, $sugestao)
+    function gera($id, $titulo, $link_titulo, $dia, $mes, $ano, $conteudo, $tags, $link_imagem, $admin, $sugestao, $conn)
     {
         echo('<article id="post-110982" class="post-110982 post type-post status-publish format-standard hentry category-imagens tag-salgadinhos-e-drogas">
                 <div class="blog-item-wrap">
@@ -39,7 +50,17 @@
                                 <span style="color: #999999;">Enviado por '. $admin .'.</span></p>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="entry-meta">
+                            ');
+
+                            if (isset($_SESSION['usuario'])){
+                                $resExisteTag = $conn->query("SELECT 1 as oi FROM noticia_favorita WHERE id_usuario = ". $_SESSION['usuario']['id'] ." AND id_noticia = '". $id ."';")->fetch_assoc();
+                                if (!isset($resExisteTag['oi']))
+                                echo('
+                                <form method="POST">
+                                    <input value="Adicionar aos favoritos" name="id_favorito" type="submit" onclick="this.value = '.$id.'" ></input>
+                                </form>');
+                            }
+                            echo('<div class="entry-meta">
                                 <div class="tagcloud col-lg-12 col-sm-12">
                                     <span>TAGS:</span>
                                     '.getTagsLinks($tags).'

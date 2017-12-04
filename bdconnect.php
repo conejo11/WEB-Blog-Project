@@ -3,7 +3,7 @@
         include 'barra.php';
 
         $conn = null;
-        $isLocal = false;
+        $isLocal = true;
 
         if (!$isLocal) {
             #Isso é por que usamos o Heroku
@@ -28,5 +28,6 @@
         if ($conn->connect_error) {
             echo("<a>Deu merda! " . $conn->connect_error . "</a>");
         }
+
     ?>
 </html>

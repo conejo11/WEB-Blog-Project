@@ -15,7 +15,9 @@
     background-color: #ff0000aa;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
 }
 
@@ -47,9 +49,7 @@ html {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-
     display: table-cell;
-
     text-decoration: none;
     padding: 15px;
     background: rgba(160, 179, 176, 0.25);
@@ -57,7 +57,6 @@ html {
     font-size: 20px;
     float: left;
     width: 33.3333333333%;
-
     cursor: pointer;
     -webkit-transition: .5s ease;
     transition: .5s ease;
@@ -73,10 +72,11 @@ html {
     color: #ffffff;
 }
 
-.tab-content>div:nth-last-child(1){
+.tab-content>div:nth-last-child(1) {
     display: none;
 }
-.tab-content>div:nth-last-child(2){
+
+.tab-content>div:nth-last-child(2) {
     display: none;
 }
 
@@ -138,7 +138,8 @@ label.highlight {
     color: #ffffff;
 }
 
-input, textarea {
+input,
+textarea {
     font-size: 22px;
     display: block;
     width: 100%;
@@ -153,7 +154,8 @@ input, textarea {
     transition: border-color .1s ease, box-shadow .1s ease;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: 0;
     border-color: #1ab188;
 }
@@ -200,7 +202,8 @@ textarea {
     -webkit-appearance: none;
 }
 
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
     background: #179b77;
 }
 
@@ -212,4 +215,17 @@ textarea {
 .forgot {
     margin-top: -20px;
     text-align: right;
+}
+
+select {
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #FFF;
+    height: 40px;
+    padding: 5px;
+    /* If you add too much padding here, the options won't show in IE */
+    width: 268px;
+    border: 1px solid #ccc;
+    margin-bottom: 40px;
 }
