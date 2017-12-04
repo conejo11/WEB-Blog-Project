@@ -19,7 +19,7 @@
         <?php
 
             $currentPage = 'manage';
-            include 'bdconnect.php';
+            include 'postCreator.php';
 
             if (!isset($_SESSION['usuario'])){
                 header("Refresh:0; url=index.php", true);
@@ -34,9 +34,9 @@
                 $titulo_reduzido = $_POST['titulo_reduzido'];
                 $corpo = $_POST['corpo'];
                 $url = $_POST['url'];
-                $dia = $_POST['dia'];
-                $mes = $_POST['mes'];
-                $ano = $_POST['ano'];
+                $dia = date('d');
+                $mes = date('F');
+                $ano = date('Y');
                 $tag = $_POST['tag'];
 
                 $nextId = intval($conn->query("SELECT MAX(id) as id FROM noticia;")->fetch_assoc()['id']) + 1;
@@ -48,6 +48,45 @@
                     if (!$res){
                         echo("<h1>tn: ". $conn->error ."</h1>");
                     } else {
+                        $queryFoi = true;
+                        $message = 'Post Adicionado!';
+                    }
+                } else {
+                    echo("<h1>n: ". $conn->error ."</h1>");
+                }
+            }
+            
+            if (!empty($_POST['adicionar_sugestao'])) {
+                $tentouExecutarQuery = true;
+
+                $id = $_POST['adicionar_sugestao'];
+
+                $res = $conn->query("SELECT * FROM sugestao WHERE id = ". $id . ";");
+                if (!$res){
+                    echo($conn->error);
+                    return;
+                }
+                $postagem = $res->fetch_assoc();
+
+                $titulo = $postagem['titulo'];
+                $titulo_reduzido = $postagem['titulo_reduzido'];
+                $corpo = $postagem['corpo'];
+                $url = $postagem['url_imagem'];
+                $dia = date('d');
+                $mes = date('F');
+                $ano = date('Y');
+                $tag = $_POST['tag'];
+
+                $nextId = intval($conn->query("SELECT MAX(id) as id FROM noticia;")->fetch_assoc()['id']) + 1;
+
+                $res = $conn->query("INSERT INTO noticia VALUES
+                    (".$nextId.", '".$titulo_reduzido."',  '".$titulo."',  '".$corpo."',  '".$url."',  ".$dia.", '".$mes."',  ".$ano.", ".$_SESSION['usuario']['id'].");");
+                if ($res){
+                    $res = $conn->query("INSERT INTO tag_noticia VALUES (". $nextId .", ". $tag .");");
+                    if (!$res){
+                        echo("<h1>tn: ". $conn->error ."</h1>");
+                    } else {
+                        $res = $conn->query("DELETE FROM sugestao WHERE id =  ". $id .";");
                         $queryFoi = true;
                         $message = 'Post Adicionado!';
                     }

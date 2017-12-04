@@ -16,6 +16,7 @@
     }
     print "</table>";
 ?>
-<button type="submit" name="excluir" value="Excluir">Partiu excluir os dados selecionados?</button>
+<br>
+<button class="button button-block" type="submit" name="excluir" value="Excluir">EXCLUIR SELECIONADOS</button>
 </form>
 </form>

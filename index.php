@@ -22,7 +22,7 @@
         
         $noticias = array();
 
-        $result = $conn->query("SELECT *, u.nome_completo as nome_admin FROM noticia n join usuario u on u.id = n.id ORDER BY (n.id) DESC;");
+        $result = $conn->query("SELECT *, u.nome_completo as nome_admin FROM noticia n join usuario u on u.id = n.id_admin ORDER BY (n.id) DESC;");
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 array_push($noticias, $row);

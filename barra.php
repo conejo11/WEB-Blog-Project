@@ -24,6 +24,8 @@
                 }
                 echo('<a '. ($currentPage == "about" ? 'class="menuAtual"' : "") .' href="about.php">Sobre</a>');
 
+                echo('<a '. ($currentPage == "sugestao" ? 'class="menuAtual"' : "") .' href="sugestao.php">Sugestões</a>');
+
                 if (!empty($_SESSION['usuario'])) {
                     echo('<a style="float:right" '. ($currentPage == "login" ? 'class="menuAtual"' : "") .' href="perfil.php">Bem Vindo '. $_SESSION['usuario']['nome_completo'] .'</a>');
                 } else {

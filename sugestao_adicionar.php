@@ -1,5 +1,5 @@
 
-<h1>Preencha os dados para adicionar uma postagem:</h1>
+<h1>Preencha os dados para adicionar uma sugestão:</h1>
 <?php
     if ($tentouExecutarQuery) {
         if ($queryFoi) {
@@ -9,7 +9,7 @@
         }
     }
 ?>
-<form action="manage.php" method="post">
+<form action="sugestao.php" method="post">
     <div class="field-wrap">
         <label>
             Título<span class="req">*</span>
@@ -33,18 +33,6 @@
             Link para Imagem<span class="req">*</span>
         </label>
         <input type="text" name='url' required autocomplete="off" />
-    </div>
-    <div class="field-wrap">
-        <select name="tag">
-            <?php
-                $res = $conn->query("SELECT id, nome_completo FROM tag;");
-                if ($res){
-                    while($row = $res->fetch_assoc()){
-                        echo("<option value='". $row['id'] ."'>". $row['nome_completo'] ."</option>");
-                    }
-                }
-            ?>
-        </select>
     </div>
     <button type="submit" class="button button-block">ADICIONAR</button>
 </form>
