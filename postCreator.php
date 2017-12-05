@@ -47,7 +47,6 @@
                                 <p><img class="aligncenter size-full wp-image-110983" src="'. $link_imagem .'" alt="" srcset="'. $link_imagem .'" sizes="(max-width: 500px)" /></p>
                                 '. $conteudo .'
                                 <p>'. (is_null($sugestao) ? "" : '<span style="color: #999999;">Dica do leitor '. $sugestao .'.</span>') .'
-                                <span style="color: #999999;">Enviado por '. $admin .'.</span></p>
                                 <div class="clearfix"></div>
                             </div>
                             ');
@@ -109,10 +108,10 @@
                                     }
                                 }
                             echo('</select>
-                            
+
                                 <input value="Adicionar postagem" name="adicionar_sugestao" type="submit" onclick="this.value = '.$id.'" ></input>
                             </form>');
-                            
+
                     echo('</div>
                     </div>
                 </div>

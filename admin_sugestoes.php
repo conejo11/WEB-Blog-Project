@@ -1,14 +1,14 @@
 
-<h1>Sugestões em análize:</h1>
+<h1>Sugestões em análise:</h1>
 <form action="manage.php" method="post">
     <?php
-    
+
         echo("<div class='artigos'>");
-        
+
         $noticias = array();
-        
-        $result = $conn->query("SELECT n.*, a.nome_completo as nome_usuario 
-                                FROM sugestao n 
+
+        $result = $conn->query("SELECT n.*, a.nome_completo as nome_usuario
+                                FROM sugestao n
                                 JOIN usuario a ON a.id = n.id_usuario
                                     ORDER BY (n.id) DESC;");
         if ($result) {
@@ -27,7 +27,7 @@
                 $row['url_imagem'],
                 $row['nome_usuario'],
                 $conn);
-            
+
         }
         echo("</div>");
 
