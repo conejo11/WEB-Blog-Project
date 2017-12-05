@@ -48,3 +48,8 @@
     </div>
     <button type="submit" class="button button-block">ADICIONAR</button>
 </form>
+
+<form action="manage.php" method="post">
+  <input type="text" name='nova_tag' required autocomplete="off" />
+  <input type="submit" name="submit" value="Adicionar TAG"/>
+</form>

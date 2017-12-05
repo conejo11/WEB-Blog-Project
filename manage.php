@@ -28,6 +28,19 @@
             $tentouExecutarQuery = false;
             $message = '';
             $queryFoi = false;
+            if (!empty($_POST['nova_tag'])){
+              $tag = $_POST['nova_tag'];
+              $nextId = intval($conn->query("SELECT MAX(id) as id FROM tag;")->fetch_assoc()['id']) + 1;
+              $res = $conn->query("INSERT INTO tag VALUES
+                  (".$nextId.", '".$tag."');");
+              if ($res){
+                      $queryFoi = true;
+                      $message = 'Post Adicionado!';
+                  
+              } else {
+                  echo("<h1>n: ". $conn->error ."</h1>");
+              }
+            }
             if (!empty($_POST['titulo'])) {
                 $tentouExecutarQuery = true;
                 $titulo = $_POST['titulo'];
@@ -55,7 +68,7 @@
                     echo("<h1>n: ". $conn->error ."</h1>");
                 }
             }
-            
+
             if (!empty($_POST['adicionar_sugestao'])) {
                 $tentouExecutarQuery = true;
 
@@ -108,7 +121,7 @@
                     }
                     $array = rtrim($array, ",").")";
                     $resultado->close();
-    
+
                 }
                 if ($total != 0){
                     if (!$conn->query("DELETE FROM usuario WHERE id in ".$array.";", MYSQLI_ASSOC)){
