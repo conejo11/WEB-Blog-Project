@@ -32,11 +32,11 @@
               $tag = $_POST['nova_tag'];
               $nextId = intval($conn->query("SELECT MAX(id) as id FROM tag;")->fetch_assoc()['id']) + 1;
               $res = $conn->query("INSERT INTO tag VALUES
-                  (".$nextId.", '".$tag."');");
+                  (".$nextId.", '".$tag."', '".$tag."');");
               if ($res){
                       $queryFoi = true;
                       $message = 'Post Adicionado!';
-                  
+
               } else {
                   echo("<h1>n: ". $conn->error ."</h1>");
               }
